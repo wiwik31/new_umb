@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2018 at 03:24 PM
+-- Generation Time: May 30, 2018 at 08:06 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.5.24
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `db_new_umb`
+-- Database: `new_umb`
 --
 
 -- --------------------------------------------------------
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `tbl_soal` (
   `pilihan_d` varchar(100) NOT NULL,
   `pilihan_e` varchar(100) NOT NULL,
   `jawaban` varchar(15) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_soal`
@@ -142,7 +142,17 @@ INSERT INTO `tbl_soal` (`id_soal`, `id_matauji`, `pertanyaan`, `pilihan_a`, `pil
 (97, 4, 'Tag', 'Label', 'Internet', 'Perkataan', 'Situs', 'Blog', 'A'),
 (98, 4, 'Absorpsi', 'Pengeluarann', 'Penafsiran', 'Penerimaan', 'Pengambilan', 'Penyerapan', 'E'),
 (99, 4, 'Via', 'Pos', 'Surat', 'Kilat khusus', 'Melalui', 'Transportasi', 'D'),
-(100, 4, 'Konjugasi', 'Penghubung', 'Tasrif V', 'Penyesuaian', 'Pemugaran', 'kenaikan', 'B');
+(100, 4, 'Konjugasi', 'Penghubung', 'Tasrif V', 'Penyesuaian', 'Pemugaran', 'kenaikan', 'B'),
+(101, 2, 'Jika x = 60 derajat dan jika sudut suatu segitiga adalah 2y, 4y, dan 4y maka …', 'x > y', 'x &lt; y', 'x = y', '2x = 3y', 'x dan y tidak bisa ditentukan', 'A'),
+(102, 2, 'Diketahui panjang sisi-sisi sebuah segitiga sama sisi adalah 3 cm dan di dalamnya dibuat segitiga sama sisi yang panjangnya 1 cm. Berapakah jumlah maksimum segitiga kecil yang dibentuk?', '3', '6', '9', '12', '15', 'C'),
+(103, 2, 'Sebuah Aquarium panjangnya 4 kaki, lebarnya 3 kaki, dan dalamnya 2 kaki. Jika air dalam aquarium mencapai 4 inci dari atas aquarium maka berapa kaki kubikkah volume air yang ada di aquarium? (1 kaki = 12 inci)', '8', '12', '16', '20', '24', 'D'),
+(104, 2, 'Sebuah balok berukuran 9 m x 300 cm x 12 m dipotong menjadi kubus dengan ukuran terbesar yang dapat dibuat. Berapa banyakkah kubus yang dapat dibuat?', '6', '8', '10', '12', '14', 'D'),
+(105, 2, 'Sebuah bujur sangkar B, luasnya 81 yang memiliki sisi y. Sedangkan A adalah persegi panjang dengan sisi 18, dan sisi yang lainnya x. Bila luas A sama dengan 2 kali luas B, maka …', 'x > y', 'y > x', 'x = y', '3y = x+2', 'x dan y tidak bisa ditentukan', 'C'),
+(106, 3, 'Semua pengendara harus mengenakan helm. Sebagian pengendara mengenakan sarung tangan.', 'Sebagian pengendara tidak mengenakan sarung tangan', 'Semua pengendara tidak mengenakan sarung tangan', 'Sebagian pengendara mengenakan helm dan sarung tangan', 'Sebagian pengendara tidak mengenakan helm dan sarung tangan', 'Sebagian pengendara tidak mengenakan helm dan tidak mengenakan sarung tangan', 'C'),
+(107, 3, 'Semua yang hadir merupakan anggota perkumpulan, sebagian yang hadir adalah psikolog.', 'Semua psikolog hadir dalam rapat', 'Semua anggota perkumpulan adalah psikolog', 'Semua anggota perkumpulan yang hadir', 'Sebagian psikolog adalah anggota perkumpulan', 'Sebagian yang hadir bukan anggota perkumpulan', 'D'),
+(108, 3, 'Tidak semua hipotesis penelitian terbukti benar. Beberapa penelitian skripsi tidak menguji hipotesis.', 'Beberapa sarjana tidak menulis skripsi', 'Beberapa hipotesis skripsi tidak terbukti benar', 'Semua hipotesis skripsi terbukti benar', 'Semua hipotesis penelitian terbukti benar', 'Semua sarjana, hipotesis skripsinya benar', 'B'),
+(109, 3, 'Ada lima orang bersahabat : Yuan, Dian, Nadia, Nisa, dan Yuni. Yang paling muda di antara mereka Yuni. Yuan tidak lebih tua dibandingkan Dian dan Nadia. Hanya Yuan lebih muda dari Nisa. Nadia lebih tua dibandingkan Dian. Urutan usia kelima orang sahabat t', 'Nadia, Dian, Nisa, Yuan, Yuni', 'Yuan, Nadia, Nisa, Dian, Yuni', 'Yuni, Nisa, Yuan, Nadia, Dian', 'Yuni, Yuan, Nisa, Dian, Nadia', 'Nadia, Dian, Yuan, Nisa, Yuni', 'A'),
+(110, 3, 'Ogis lebih tinggi daripada Benny, Rangga lebih pendek daripada Ogis, maka:', 'Jika Rangga 180 cm, Benny 180', 'Jika Rangga 180 cm, Benny tingginya kurang dari 180 cm', 'Jika Rangga 180 cm, Benny tingginya lebih dari 180 cm', 'Jika Ogis 180 cm, Benny dan Rangga tingginya kurang dari 180 cm', 'Tidak terdeteksi', 'D');
 
 --
 -- Indexes for dumped tables
@@ -162,7 +172,7 @@ ALTER TABLE `tbl_soal`
 -- AUTO_INCREMENT for table `tbl_soal`
 --
 ALTER TABLE `tbl_soal`
-  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=101;
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=111;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
