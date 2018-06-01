@@ -15,6 +15,17 @@ class Laporan_model extends CI_Model
         parent::__construct();
     }
 
+    //Relasikan Tabel
+    function jurusan($limit, $start = 0, $q = NULL)
+    {
+
+        //Relasikan tabel dengan dinamis
+        $this->db->join('tbl_jurusan', 'tbl_jurusan.id_jurusan = tbl_laporan.id_jurusan', $q);
+        $this->db->order_by('id_laporan','DESC');
+        $this->db->limit($limit, $start);
+        return $this->db->get('tbl_laporan')->result();
+    }
+
     // get all
     function get_all()
     {

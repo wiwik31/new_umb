@@ -10,28 +10,27 @@ class Laporan extends CI_Controller
         parent::__construct();
         is_login();
         $this->load->model('Laporan_model');
+        $this->load->model('Jurusan_model');
         $this->load->library('form_validation');
     }
 
     public function index()
     {
         $q = urldecode($this->input->get('q', TRUE));
-        $start = intval($this->uri->segment(3));
+        $start = intval($this->input->get('start'));
         
         if ($q <> '') {
-            $config['base_url'] = base_url() . '.php/c_url/index.html?q=' . urlencode($q);
-            $config['first_url'] = base_url() . 'index.php/laporan/index.html?q=' . urlencode($q);
+            $config['base_url'] = base_url() . 'laporan?q=' . urlencode($q);
+            $config['first_url'] = base_url() . 'laporan?q=' . urlencode($q);
         } else {
-            $config['base_url'] = base_url() . 'index.php/laporan/index/';
-            $config['first_url'] = base_url() . 'index.php/laporan/index/';
+            $config['base_url'] = base_url() . 'laporan';
+            $config['first_url'] = base_url() . 'laporan';
         }
 
         $config['per_page'] = 10;
-        $config['page_query_string'] = FALSE;
+        $config['page_query_string'] = TRUE;
         $config['total_rows'] = $this->Laporan_model->total_rows($q);
-        $laporan = $this->Laporan_model->get_limit_data($config['per_page'], $start, $q);
-        $config['full_tag_open'] = '<ul class="pagination pagination-sm no-margin pull-right">';
-        $config['full_tag_close'] = '</ul>';
+        $laporan = $this->Laporan_model->jurusan($config['per_page'], $start, $q);
         $this->load->library('pagination');
         $this->pagination->initialize($config);
 
@@ -72,6 +71,7 @@ class Laporan extends CI_Controller
     {
         $data = array(
             'button' => 'Create',
+            'jurusan_data' => $this->Jurusan_model->get_all(),
             'action' => site_url('laporan/create_action'),
 	    'id_laporan' => set_value('id_laporan'),
 	    'id_jurusan' => set_value('id_jurusan'),
@@ -119,6 +119,7 @@ class Laporan extends CI_Controller
         if ($row) {
             $data = array(
                 'button' => 'Update',
+                'jurusan_data' => $this->Jurusan_model->get_all(),
                 'action' => site_url('laporan/update_action'),
 		'id_laporan' => set_value('id_laporan', $row->id_laporan),
 		'id_jurusan' => set_value('id_jurusan', $row->id_jurusan),

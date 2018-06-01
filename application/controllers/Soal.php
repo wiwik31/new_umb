@@ -24,17 +24,17 @@ class Soal extends CI_Controller
         
         //ketentuan
         $m = count($jumlah);
-        $a = 11;
-        $c = 5;
-        $xn = 0;
+        $a = 1;
+        $c = 7;
+        $xn = 6;
 
         $soal_data = array();
         // for ($i=1; $i <= count($limit); $i++) {
-        for ($i=1; $i <= 10; $i++) { 
+        for ($i=1; $i <= 50; $i++) { 
             $r = rand(1, $m);
             //LCM
             $xn = ($a * $r + $c) % $m; 
-            if ($xn < 0) {
+            if ($xn < 6) {
                 $xn = $m;
             }
             $soals = $this->db->query(" SELECT * FROM tbl_soal WHERE id_soal ='$xn' ")->result();
@@ -97,7 +97,7 @@ class Soal extends CI_Controller
 
             // var_dump($id_soal);exit;
 
-            for ($i=0; $i < 10 ; $i++) { 
+            for ($i=0; $i < 50 ; $i++) { 
                 $nomor =$id_soal[$i];
                 if (!empty($pilihan[$nomor])) {
                    $jawaban = $pilihan[$nomor];

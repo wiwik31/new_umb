@@ -52,7 +52,7 @@
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>Id Jurusan</th>
+		<th>Jurusan</th>
 		<th>Kode Pendaftaran</th>
 		<th>Id Peserta</th>
 		<th>Id Panitia</th>
@@ -68,7 +68,7 @@
                 ?>
                 <tr>
 			<td width="10px"><?php echo ++$start ?></td>
-			<td><?php echo $laporan->id_jurusan ?></td>
+			<td><?php echo $laporan->nama_jurusan ?></td>
 			<td><?php echo $laporan->kode_pendaftaran ?></td>
 			<td><?php echo $laporan->id_peserta ?></td>
 			<td><?php echo $laporan->id_panitia ?></td>
