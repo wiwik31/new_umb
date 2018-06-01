@@ -112,9 +112,9 @@ class Soal extends CI_Controller
                 }
             }
             
-            $jum_soal = $this->Soal_model->get_all();
+            // $jum_soal = $this->Soal_model->get_all();
             //rumus skor
-            $skor = 100 / count($jum_soal) * $benar;
+            $skor = 100 / 50 * $benar;
             $nilai = number_format($skor, 1);
             $status = '';
             if ($nilai >= 70) {
