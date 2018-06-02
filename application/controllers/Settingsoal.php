@@ -10,7 +10,13 @@ class Settingsoal extends CI_Controller
         parent::__construct();
         if($this->session->userdata('admin_logged_in')!=TRUE && $this->session->userdata('level')==='peserta' )  redirect('welcome');  
         $this->load->model('Settingsoal_model');
+        $this->load->model('Soal_model');
         $this->load->library('form_validation');
+    }
+
+    public function jumlah(){
+        $jumlah = $this->db->query("SELECT count(*) from karyawan")->result();
+    
     }
 
     public function index()

@@ -10,8 +10,11 @@ class Peserta extends CI_Controller
         parent::__construct();
         is_login();
         $this->load->model('Peserta_model');
+        $this->load->model('Jurusan_model');
+        $this->load->model('Batch_model');
         $this->load->library('form_validation');
     }
+
 
     public function index()
     {
@@ -29,7 +32,7 @@ class Peserta extends CI_Controller
         $config['per_page'] = 10;
         $config['page_query_string'] = FALSE;
         $config['total_rows'] = $this->Peserta_model->total_rows($q);
-        $peserta = $this->Peserta_model->get_limit_data($config['per_page'], $start, $q);
+        $peserta = $this->Peserta_model->jurusan($config['per_page'], $start, $q);
         $config['full_tag_open'] = '<ul class="pagination pagination-sm no-margin pull-right">';
         $config['full_tag_close'] = '</ul>';
         $this->load->library('pagination');
@@ -50,22 +53,24 @@ class Peserta extends CI_Controller
         $row = $this->Peserta_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id_peserta' => $row->id_peserta,
-		'kode_pendaftaran' => $row->kode_pendaftaran,
-		'nama_peserta' => $row->nama_peserta,
-		'id_jurusan' => $row->id_jurusan,
-		'id_panitia' => $row->id_panitia,
-		'id_batch' => $row->id_batch,
-		'jenkel' => $row->jenkel,
-		'nama_ayah' => $row->nama_ayah,
-		'nama_ibu' => $row->nama_ibu,
-		'tgl_lahir' => $row->tgl_lahir,
-		'alamat' => $row->alamat,
-		'no_tlp' => $row->no_tlp,
-		'email' => $row->email,
-		'username' => $row->username,
-		'password' => $row->password,
-		'status' => $row->status,
+            'jurusan_data' => $this->Jurusan_model->get_all(),
+            'batch_data' => $this->Batch_model->get_all(),
+    		'id_peserta' => $row->id_peserta,
+    		'kode_pendaftaran' => $row->kode_pendaftaran,
+    		'nama_peserta' => $row->nama_peserta,
+    		'id_jurusan' => $row->id_jurusan,
+    		'id_panitia' => $row->id_panitia,
+    		'id_batch' => $row->id_batch,
+    		'jenkel' => $row->jenkel,
+    		'nama_ayah' => $row->nama_ayah,
+    		'nama_ibu' => $row->nama_ibu,
+    		'tgl_lahir' => $row->tgl_lahir,
+    		'alamat' => $row->alamat,
+    		'no_tlp' => $row->no_tlp,
+    		'email' => $row->email,
+    		'username' => $row->username,
+    		'password' => $row->password,
+    		'status' => $row->status,
 	    );
             $this->template->load('template','peserta/tbl_peserta_read', $data);
         } else {
@@ -78,6 +83,8 @@ class Peserta extends CI_Controller
     {
         $data = array(
             'button' => 'Create',
+            'jurusan_data' => $this->Jurusan_model->get_all(),
+            'batch_data' => $this->Batch_model->get_all(),
             'action' => site_url('peserta/create_action'),
 	    'id_peserta' => set_value('id_peserta'),
 	    'kode_pendaftaran' => set_value('kode_pendaftaran'),
@@ -137,6 +144,8 @@ class Peserta extends CI_Controller
         if ($row) {
             $data = array(
                 'button' => 'Update',
+                'jurusan_data' => $this->Jurusan_model->get_all(),
+                'batch_data' => $this->Batch_model->get_all(),
                 'action' => site_url('peserta/update_action'),
 		'id_peserta' => set_value('id_peserta', $row->id_peserta),
 		'kode_pendaftaran' => set_value('kode_pendaftaran', $row->kode_pendaftaran),

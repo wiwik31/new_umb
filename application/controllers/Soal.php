@@ -51,41 +51,7 @@ class Soal extends CI_Controller
        $this->template->load('template','soal_peserta/soal', $data);
     }
     
-    // public function acakjawaban(){
-    //     // METODE LCM
-        
-    //     //batas soal yang tampil
-    //     //$limit = $this->db->query(" SELECT * FROM tbl_soal ORDER BY id_soal ASC LIMIT 20  ")->result();
-    //     $total = $this->db->query("SELECT pilihan_a, pilihan_b,pilihan_c, pilihan_d,pilihan_e FROM tbl_soal where id_soal = '$xn' ")->result();
-        
-    //     //ketentuan
-    //     $m = count($total);
-    //     $a = 11;
-    //     $c = 5;
-    //     $xn = 0;
-
-    //     $soal_data = array();
-    //     // for ($i=1; $i <= count($limit); $i++) {
-    //     for ($i=1; $i <= 5; $i++) { 
-    //         $r = rand(1, $m);
-    //         //LCM
-    //         $xn = ($a * $r + $c) % $m; 
-    //         if ($xn < 0) {
-    //             $xn = $m;
-    //         }
-    //         $soals = $this->db->query(" SELECT pilihan_a, pilihan_b,pilihan_c, pilihan_d,pilihan_e FROM tbl_soal  WHERE id_soal ='$xn' ")->result();
-            
-    //         foreach ($soals as $soal) {
-    //             $soal_data[] = $soal;
-    //             // echo "<pre>";
-    //             // echo $i .'.'.$soal->pertanyaan. ' id.'. $soal->id_soal;
-    //             // echo "</pre>";
-    //         }
-    //     }
-
-    //    $data = array('soal'=>$soal_data);
-    //    $this->template->load('template','soal_peserta/soal', $data);
-    // }
+   
     public function cekJawaban(){
         if (isset($_POST['submit'])) {
             $pilihan = $this->input->post('pilihan');

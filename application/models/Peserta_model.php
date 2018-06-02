@@ -15,6 +15,17 @@ class Peserta_model extends CI_Model
         parent::__construct();
     }
 
+    function Jurusan($limit, $start = 0, $q = NULL)
+    {
+
+        //Relasikan tabel dengan dinamis
+        $this->db->join('tbl_jurusan', 'tbl_jurusan.id_jurusan = tbl_peserta.id_jurusan', $q);
+        $this->db->join('tbl_batch', 'tbl_batch.id_batch = tbl_peserta.id_batch', $q);
+        $this->db->order_by('id_peserta','DESC');
+        $this->db->limit($limit, $start);
+        return $this->db->get('tbl_peserta')->result();
+    }
+
     // get all
     function get_all()
     {

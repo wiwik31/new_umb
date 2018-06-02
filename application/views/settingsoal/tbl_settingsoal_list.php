@@ -50,8 +50,7 @@
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>Jumlah Soal</th>
-		<th>Action</th>
+        <th>Jumlah Soal</th>
             </tr><?php
             foreach ($settingsoal_data as $settingsoal)
             {
@@ -59,7 +58,7 @@
                 <tr>
 			<td width="10px"><?php echo ++$start ?></td>
 			<td><?php echo $settingsoal->jumlah_soal ?></td>
-			<td style="text-align:center" width="200px">
+			<!-- <td style="text-align:center" width="200px">
 				<?php 
 				// echo anchor(site_url('settingsoal/read/'.$settingsoal->id_set),'<i class="fa fa-eye" aria-hidden="true"></i>','class="btn btn-danger btn-sm"'); 
 				echo '  '; 
@@ -67,7 +66,7 @@
 				echo '  '; 
 				echo anchor(site_url('settingsoal/delete/'.$settingsoal->id_set),'<i class="fa fa-trash-o" aria-hidden="true"></i>Hapus ','class="btn btn-danger btn-sm" Delete','onclick="javasciprt: return confirm(\'Yakin menghapus ?\')"'); 
 				?>
-			</td>
+			</td> -->
 		</tr>
                 <?php
             }
