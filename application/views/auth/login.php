@@ -30,7 +30,7 @@
     <body class="hold-transition login-page">
         <div class="login-box">
             <div class="login-logo">
-                <a href="<?php echo base_url(); ?>/adminlte/index2.html"><b>SIUMPT STMIK Handayani</b></a>
+                <!-- <a href="<?php echo base_url(); ?>/adminlte/index2.html"> --><b>SIUMPT STMIK Handayani</b></a>
             </div>
             <!-- /.login-logo -->
             <div class="login-box-body">
@@ -47,20 +47,35 @@
                 <!--<form action="<?php echo base_url(); ?>/adminlte/index2.html" method="post">-->
                 <?php echo form_open('auth/cheklogin'); ?>
                 <div class="form-group has-feedback">
+                  <select name="level" class="form-control">
+                    <option value="peserta">Peserta</option>
+                    <option value="admin">Administator</option>
+                  </select>
+                 
+                </div>
+                <div class="form-group has-feedback">
                     <input type="email" class="form-control" name="email" placeholder="Email">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="password" class="form-control" name="password" placeholder="Password">
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    <input type="password" class="form-control" name="password" placeholder="Password" id="myInput">
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span> <br>
+                    <input type="checkbox" onclick="myFunction()">   Show Password
+
+                    function myFunction(){
+                    var x = document.getElemenBYId("myInput");
+                        if (x.type === "password"){
+                        x.type = "text";
+                    }else {
+                    x.type = "password";
+                }
+                }
                 </div>
+                 <p>* Peserta ujian silahkan hubungi panitia untuk mendapatkan akun.</p>
                 
-                <div class="form-group has-feedback">
-                  <select name="level" class="form-control">
-                    <option value="admin">Administator</option>
-                    <option value="peserta">Peserta</option>
-                  </select>
-                </div>
+                <!-- Scrip Menghilangkan password -->
+
+
 
                 <div class="row">
                     <div class="col-xs-4">

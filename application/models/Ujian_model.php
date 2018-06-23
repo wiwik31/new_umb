@@ -15,6 +15,18 @@ class Ujian_model extends CI_Model
         parent::__construct();
     }
 
+    function peserta($limit, $start = 0, $q = NULL)
+    {
+
+        //Relasikan tabel dengan dinamis
+        $this->db->join('tbl_peserta', 'tbl_peserta.id_peserta = tbl_ujian.id_peserta', $q);
+        // $this->db->join('tbl_panitia', 'tbl_panitia.id_panitia = tbl_ujian.id_panitia', $q);
+        // $this->db->join('tbl_batch', 'tbl_batch.id_batch = tbl_ujian.id_batch', $q);
+        $this->db->order_by('id_ujian','DESC');
+        $this->db->limit($limit, $start);
+        return $this->db->get('tbl_ujian')->result();
+    }
+
     // get all
     function get_all()
     {

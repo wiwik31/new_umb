@@ -37,9 +37,34 @@
 	   		</td>
 	   	</tr>
 	    <!-- <tr><td width='200'>Id Jurusan <?php echo form_error('id_jurusan') ?></td><td><input type="text" class="form-control" name="id_jurusan" id="id_jurusan" placeholder="Id Jurusan" value="<?php echo $id_jurusan; ?>" /></td></tr> -->
-	    <tr><td width='200'>Id Panitia <?php echo form_error('id_panitia') ?></td><td><input type="text" class="form-control" name="id_panitia" id="id_panitia" placeholder="Id Panitia" value="<?php echo $id_panitia; ?>" /></td></tr>
+	    <!-- <tr><td width='200'>Id Panitia <?php echo form_error('id_panitia') ?></td><td><input type="text" class="form-control" name="id_panitia" id="id_panitia" placeholder="Id Panitia" value="<?php echo $id_panitia; ?>" /></td></tr> -->
 	    <tr>
-	   		<td>Batch</td>
+	   		<td>Panitia</td>
+	   		<td>
+	   			<?php 
+	   				if ($this->uri->segment('2')=="update") {
+	   			 ?>
+	   			 <select name="id_panitia" class="form-control">
+						<?php 
+							foreach ($panitia_data as $panitia) {
+								echo " <option value='$panitia->id_panitia'";
+								echo $id_panitia==$panitia->id_panitia?'selected':'' ;
+								echo ">$panitia->nama_panitia</option>";
+							}
+						 ?>
+				</select>
+	   			 <?php } else{ ?>
+
+	   			<select name="id_panitia" id="id_panitia" class="form-control">
+	   				<?php foreach ($panitia_data as $panitia): ?>
+	   				<option value="<?php echo $panitia->id_panitia ?>"><?php echo $panitia->nama_panitia ?></option>
+	   				<?php endforeach ?>
+	   			</select>
+	   			 <?php } ?>
+	   		</td>
+	   	</tr>
+	   	<tr>
+	   		<td>Jadwal</td>
 	   		<td>
 	   			<?php 
 	   				if ($this->uri->segment('2')=="update") {
@@ -64,8 +89,14 @@
 	   		</td>
 	   	</tr>
 	    <!-- <tr><td width='200'>Id Batch <?php echo form_error('id_batch') ?></td><td><input type="text" class="form-control" name="id_batch" id="id_batch" placeholder="Id Batch" value="<?php echo $id_batch; ?>" /></td></tr> -->
-	    <tr><td width='200'>Jenkel <?php echo form_error('jenkel') ?></td><td><input type="text" class="form-control" name="jenkel" id="jenkel" placeholder="Jenkel" value="<?php echo $jenkel; ?>" /></td></tr>
-	    <tr><td width='200'>Nama Ayah <?php echo form_error('nama_ayah') ?></td><td><input type="text" class="form-control" name="nama_ayah" id="nama_ayah" placeholder="Nama Ayah" value="<?php echo $nama_ayah; ?>" /></td></tr>
+	    <!-- <tr><td width='200'>Jenkel <?php echo form_error('jenkel') ?></td><td><input type="text" class="form-control" name="jenkel" id="jenkel" placeholder="Jenkel" value="<?php echo $jenkel; ?>" /></td></tr> -->
+	    <tr>
+	    	<td width='200'>Jenkel <?php echo form_error('jenkel') ?></td>
+	    	<td><input type="radio" name="jenkel" value="L" checked="" />Laki-laki
+	    		<input type="radio" name="jenkel" value="P"/>Perempuan<br/>
+	    	</td>
+	    </tr>
+	    <tr><td width='200'>Nama Ayah <?php echo form_error('nama_ayah') ?></td><td><input type="text" class="form-control"s name="nama_ayah" id="nama_ayah" placeholder="Nama Ayah" value="<?php echo $nama_ayah; ?>" /></td></tr>
 	    <tr><td width='200'>Nama Ibu <?php echo form_error('nama_ibu') ?></td><td><input type="text" class="form-control" name="nama_ibu" id="nama_ibu" placeholder="Nama Ibu" value="<?php echo $nama_ibu; ?>" /></td></tr>
 	    <tr><td width='200'>Tgl Lahir <?php echo form_error('tgl_lahir') ?></td><td><input type="date" class="form-control" name="tgl_lahir" id="tgl_lahir" placeholder="Tgl Lahir" value="<?php echo $tgl_lahir; ?>" /></td></tr>
 	    
@@ -75,7 +106,7 @@
 	    <tr><td width='200'>Username <?php echo form_error('username') ?></td><td><input type="text" class="form-control" name="username" id="username" placeholder="Username" value="<?php echo $username; ?>" /></td></tr>
 	    <tr><td width='200'>Password <?php echo form_error('password') ?></td><td><input type="text" class="form-control" name="password" id="password" placeholder="Password" value="<?php echo $password; ?>" /></td></tr>
 	    <tr><td width='200'>Status Aktif <?php echo form_error('status') ?></td><td>
-        <?php echo form_dropdown('status', array('1' => 'Aktif', '0' => 'Tidak AKtif'), $status, array('class' => 'form-control')); ?>
+        <?php echo form_dropdown('status', array('1' => 'Aktif', '0' => 'Tidak Aktif'), $status, array('class' => 'form-control')); ?>
         </td></tr>
 	    <!-- <tr><td width='200'>Status <?php echo form_error('status') ?></td><td><input type="text" class="form-control" name="status" id="status" placeholder="Status" value="<?php echo $status; ?>" /></td></tr> -->
 	    <tr><td></td><td><input type="hidden" name="id_peserta" value="<?php echo $id_peserta; ?>" /> 

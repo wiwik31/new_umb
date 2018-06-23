@@ -8,8 +8,9 @@ class Ujian extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        is_login();
+        // is_login();
         $this->load->model('Ujian_model');
+        $this->load->model('Peserta_model');
         $this->load->library('form_validation');
     }
 
@@ -29,7 +30,7 @@ class Ujian extends CI_Controller
         $config['per_page'] = 10;
         $config['page_query_string'] = FALSE;
         $config['total_rows'] = $this->Ujian_model->total_rows($q);
-        $ujian = $this->Ujian_model->get_limit_data($config['per_page'], $start, $q);
+        $ujian = $this->Ujian_model->peserta($config['per_page'], $start, $q);
         $config['full_tag_open'] = '<ul class="pagination pagination-sm no-margin pull-right">';
         $config['full_tag_close'] = '</ul>';
         $this->load->library('pagination');

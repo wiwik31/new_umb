@@ -53,40 +53,38 @@
                 <th>Kode Pendaftaran</th>
                 <th>Nama Peserta</th>
                 <th>Jurusan</th>
-                <th>Batch</th>
-                <th>Username</th>
+                <th>Jadwal</th>
                 <th>Status</th>
                 <th>Action</th>
-            </tr><?php
-            foreach ($peserta_data as $peserta)
-            {
-                ?>
-                <tr>
-			<td width="10px"><?php echo ++$start ?></td>
-			<td><?php echo $peserta->kode_pendaftaran ?></td>
-			<td><?php echo $peserta->nama_peserta ?></td>
-			<td><?php echo $peserta->nama_jurusan ?></td>
-			<td><?php echo $peserta->waktu_batch ?></td>
-			<td><?php echo $peserta->username ?></td>
-            <td>
-                <?php 
-                if ($peserta->status == 1) {
-                    echo "Aktif";
-                }else{
-                    echo "Tidak AKtif";
-                    }
-                 ?>         
-                
-            </td>
-			<td style="text-align:center" width="200px">
-				<?php 
-				echo anchor(site_url('peserta/read/'.$peserta->id_peserta),'<i class="fa fa-eye" aria-hidden="true"></i>','class="btn btn-danger btn-sm"'); 
-				echo '  '; 
-				echo anchor(site_url('peserta/update/'.$peserta->id_peserta),'<i class="fa fa-pencil-square-o" aria-hidden="true"></i>','class="btn btn-danger btn-sm"'); 
-                echo '  '; 
-                echo anchor(site_url('peserta/delete/'.$peserta->id_peserta),'<i class="fa fa-trash-o" aria-hidden="true"></i>',array('class'=>'btn btn-danger btn-sm', 'onclick'=>"javasciprt: return confirm('Are You Sure ?')"));
-				?>
-			</td>
+                    </tr><?php
+                    foreach ($peserta_data as $peserta)
+                    {
+                        ?>
+                        <tr>
+        			<td width="10px"><?php echo ++$start ?></td>
+        			<td><?php echo $peserta->kode_pendaftaran ?></td>
+        			<td><?php echo $peserta->nama_peserta ?></td>
+        			<td><?php echo $peserta->nama_jurusan ?></td>
+        			<td><?php echo $peserta->waktu_batch ?></td>
+                    <td>
+                        <?php 
+                        if ($peserta->status == 1) {
+                            echo "Aktif";
+                        }else{
+                            echo "Tidak Aktif";
+                            }
+                         ?>         
+                        
+                    </td>
+        			<td style="text-align:center" width="200px">
+        				<?php 
+        				echo anchor(site_url('peserta/read/'.$peserta->id_peserta),'<i class="fa fa-eye" aria-hidden="true"></i>','class="btn btn-danger btn-sm"'); 
+        				echo '  '; 
+        				echo anchor(site_url('peserta/update/'.$peserta->id_peserta),'<i class="fa fa-pencil-square-o" aria-hidden="true"></i>','class="btn btn-danger btn-sm"'); 
+                        echo '  '; 
+                        echo anchor(site_url('peserta/delete/'.$peserta->id_peserta),'<i class="fa fa-trash-o" aria-hidden="true"></i>',array('class'=>'btn btn-danger btn-sm', 'onclick'=>"javasciprt: return confirm('Are You Sure ?')"));
+        				?>
+        			</td>
 		</tr>
                 <?php
             }

@@ -12,6 +12,7 @@ class Peserta extends CI_Controller
         $this->load->model('Peserta_model');
         $this->load->model('Jurusan_model');
         $this->load->model('Batch_model');
+        $this->load->model('Panitia_model');
         $this->load->library('form_validation');
     }
 
@@ -55,6 +56,7 @@ class Peserta extends CI_Controller
             $data = array(
             'jurusan_data' => $this->Jurusan_model->get_all(),
             'batch_data' => $this->Batch_model->get_all(),
+            'panitia_data' => $this->Panitia_model->get_all(),
     		'id_peserta' => $row->id_peserta,
     		'kode_pendaftaran' => $row->kode_pendaftaran,
     		'nama_peserta' => $row->nama_peserta,
@@ -85,6 +87,7 @@ class Peserta extends CI_Controller
             'button' => 'Create',
             'jurusan_data' => $this->Jurusan_model->get_all(),
             'batch_data' => $this->Batch_model->get_all(),
+            'panitia_data' => $this->Panitia_model->get_all(),
             'action' => site_url('peserta/create_action'),
 	    'id_peserta' => set_value('id_peserta'),
 	    'kode_pendaftaran' => set_value('kode_pendaftaran'),
@@ -146,6 +149,7 @@ class Peserta extends CI_Controller
                 'button' => 'Update',
                 'jurusan_data' => $this->Jurusan_model->get_all(),
                 'batch_data' => $this->Batch_model->get_all(),
+                'panitia_data' => $this->Panitia_model->get_all(),
                 'action' => site_url('peserta/update_action'),
 		'id_peserta' => set_value('id_peserta', $row->id_peserta),
 		'kode_pendaftaran' => set_value('kode_pendaftaran', $row->kode_pendaftaran),

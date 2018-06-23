@@ -63,9 +63,9 @@
 			<td>
                 <?php 
                 if ($matauji->aktif == 1) {
-                    echo "AKTIF";
+                    echo "Aktif";
                 }else{
-                    echo "TIDAK AKTIF";
+                    echo "Tidak Aktif";
                     }
                  ?>         
                 

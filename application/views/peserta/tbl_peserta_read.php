@@ -11,8 +11,8 @@
 						<tr><td>Kode Pendaftaran</td><td><?php echo $kode_pendaftaran; ?></td></tr>
 						<tr><td>Nama Peserta</td><td><?php echo $nama_peserta; ?></td></tr>
 						<tr><td>Id Jurusan</td><td><?php echo $id_jurusan; ?></td></tr>
-						<tr><td>Id Panitia</td><td><?php echo $id_panitia; ?></td></tr>
-						<tr><td>Id Batch</td><td><?php echo $id_batch; ?></td></tr>
+						<tr><td>Panitia</td><td><?php echo $id_panitia; ?></td></tr>
+						<tr><td>Batch</td><td><?php echo $id_batch; ?></td></tr>
 						<tr><td>Jenkel</td><td><?php echo $jenkel; ?></td></tr>
 						<tr><td>Nama Ayah</td><td><?php echo $nama_ayah; ?></td></tr>
 						<tr><td>Nama Ibu</td><td><?php echo $nama_ibu; ?></td></tr>
