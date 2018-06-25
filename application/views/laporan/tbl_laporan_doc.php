@@ -20,13 +20,9 @@
         <table class="word-table" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>Id Jurusan</th>
-		<th>Kode Pendaftaran</th>
 		<th>Id Peserta</th>
-		<th>Id Panitia</th>
-		<th>Id Batch</th>
+		<th>Id Jurusan</th>
 		<th>Tgl Ujian</th>
-		<th>Durasi</th>
 		<th>Id Nilai</th>
 		<th>Status</th>
 		
@@ -36,13 +32,9 @@
                 ?>
                 <tr>
 		      <td><?php echo ++$start ?></td>
-		      <td><?php echo $laporan->id_jurusan ?></td>
-		      <td><?php echo $laporan->kode_pendaftaran ?></td>
 		      <td><?php echo $laporan->id_peserta ?></td>
-		      <td><?php echo $laporan->id_panitia ?></td>
-		      <td><?php echo $laporan->id_batch ?></td>
+		      <td><?php echo $laporan->id_jurusan ?></td>
 		      <td><?php echo $laporan->tgl_ujian ?></td>
-		      <td><?php echo $laporan->durasi ?></td>
 		      <td><?php echo $laporan->id_nilai ?></td>
 		      <td><?php echo $laporan->status ?></td>	
                 </tr>

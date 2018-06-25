@@ -10,39 +10,18 @@ class Laporan extends CI_Controller
         parent::__construct();
         is_login();
         $this->load->model('Laporan_model');
-        $this->load->library('form_validation');
+        $this->load->library('form_validation');        
+	$this->load->library('datatables');
     }
 
     public function index()
     {
-        $q = urldecode($this->input->get('q', TRUE));
-        $start = intval($this->uri->segment(3));
-        
-        if ($q <> '') {
-            $config['base_url'] = base_url() . '.php/c_url/index.html?q=' . urlencode($q);
-            $config['first_url'] = base_url() . 'index.php/laporan/index.html?q=' . urlencode($q);
-        } else {
-            $config['base_url'] = base_url() . 'index.php/laporan/index/';
-            $config['first_url'] = base_url() . 'index.php/laporan/index/';
-        }
-
-        $config['per_page'] = 10;
-        $config['page_query_string'] = FALSE;
-        $config['total_rows'] = $this->Laporan_model->total_rows($q);
-        $laporan = $this->Laporan_model->get_limit_data($config['per_page'], $start, $q);
-        $config['full_tag_open'] = '<ul class="pagination pagination-sm no-margin pull-right">';
-        $config['full_tag_close'] = '</ul>';
-        $this->load->library('pagination');
-        $this->pagination->initialize($config);
-
-        $data = array(
-            'laporan_data' => $laporan,
-            'q' => $q,
-            'pagination' => $this->pagination->create_links(),
-            'total_rows' => $config['total_rows'],
-            'start' => $start,
-        );
-        $this->template->load('template','laporan/tbl_laporan_list', $data);
+        $this->template->load('template','laporan/tbl_laporan_list');
+    } 
+    
+    public function json() {
+        header('Content-Type: application/json');
+        echo $this->Laporan_model->json();
     }
 
     public function read($id) 
@@ -51,13 +30,9 @@ class Laporan extends CI_Controller
         if ($row) {
             $data = array(
 		'id_laporan' => $row->id_laporan,
-		'id_jurusan' => $row->id_jurusan,
-		'kode_pendaftaran' => $row->kode_pendaftaran,
 		'id_peserta' => $row->id_peserta,
-		'id_panitia' => $row->id_panitia,
-		'id_batch' => $row->id_batch,
+		'id_jurusan' => $row->id_jurusan,
 		'tgl_ujian' => $row->tgl_ujian,
-		'durasi' => $row->durasi,
 		'id_nilai' => $row->id_nilai,
 		'status' => $row->status,
 	    );
@@ -74,13 +49,9 @@ class Laporan extends CI_Controller
             'button' => 'Create',
             'action' => site_url('laporan/create_action'),
 	    'id_laporan' => set_value('id_laporan'),
-	    'id_jurusan' => set_value('id_jurusan'),
-	    'kode_pendaftaran' => set_value('kode_pendaftaran'),
 	    'id_peserta' => set_value('id_peserta'),
-	    'id_panitia' => set_value('id_panitia'),
-	    'id_batch' => set_value('id_batch'),
+	    'id_jurusan' => set_value('id_jurusan'),
 	    'tgl_ujian' => set_value('tgl_ujian'),
-	    'durasi' => set_value('durasi'),
 	    'id_nilai' => set_value('id_nilai'),
 	    'status' => set_value('status'),
 	);
@@ -95,13 +66,9 @@ class Laporan extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'id_jurusan' => $this->input->post('id_jurusan',TRUE),
-		'kode_pendaftaran' => $this->input->post('kode_pendaftaran',TRUE),
 		'id_peserta' => $this->input->post('id_peserta',TRUE),
-		'id_panitia' => $this->input->post('id_panitia',TRUE),
-		'id_batch' => $this->input->post('id_batch',TRUE),
+		'id_jurusan' => $this->input->post('id_jurusan',TRUE),
 		'tgl_ujian' => $this->input->post('tgl_ujian',TRUE),
-		'durasi' => $this->input->post('durasi',TRUE),
 		'id_nilai' => $this->input->post('id_nilai',TRUE),
 		'status' => $this->input->post('status',TRUE),
 	    );
@@ -121,13 +88,9 @@ class Laporan extends CI_Controller
                 'button' => 'Update',
                 'action' => site_url('laporan/update_action'),
 		'id_laporan' => set_value('id_laporan', $row->id_laporan),
-		'id_jurusan' => set_value('id_jurusan', $row->id_jurusan),
-		'kode_pendaftaran' => set_value('kode_pendaftaran', $row->kode_pendaftaran),
 		'id_peserta' => set_value('id_peserta', $row->id_peserta),
-		'id_panitia' => set_value('id_panitia', $row->id_panitia),
-		'id_batch' => set_value('id_batch', $row->id_batch),
+		'id_jurusan' => set_value('id_jurusan', $row->id_jurusan),
 		'tgl_ujian' => set_value('tgl_ujian', $row->tgl_ujian),
-		'durasi' => set_value('durasi', $row->durasi),
 		'id_nilai' => set_value('id_nilai', $row->id_nilai),
 		'status' => set_value('status', $row->status),
 	    );
@@ -146,13 +109,9 @@ class Laporan extends CI_Controller
             $this->update($this->input->post('id_laporan', TRUE));
         } else {
             $data = array(
-		'id_jurusan' => $this->input->post('id_jurusan',TRUE),
-		'kode_pendaftaran' => $this->input->post('kode_pendaftaran',TRUE),
 		'id_peserta' => $this->input->post('id_peserta',TRUE),
-		'id_panitia' => $this->input->post('id_panitia',TRUE),
-		'id_batch' => $this->input->post('id_batch',TRUE),
+		'id_jurusan' => $this->input->post('id_jurusan',TRUE),
 		'tgl_ujian' => $this->input->post('tgl_ujian',TRUE),
-		'durasi' => $this->input->post('durasi',TRUE),
 		'id_nilai' => $this->input->post('id_nilai',TRUE),
 		'status' => $this->input->post('status',TRUE),
 	    );
@@ -179,13 +138,9 @@ class Laporan extends CI_Controller
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('id_jurusan', 'id jurusan', 'trim|required');
-	$this->form_validation->set_rules('kode_pendaftaran', 'kode pendaftaran', 'trim|required');
 	$this->form_validation->set_rules('id_peserta', 'id peserta', 'trim|required');
-	$this->form_validation->set_rules('id_panitia', 'id panitia', 'trim|required');
-	$this->form_validation->set_rules('id_batch', 'id batch', 'trim|required');
+	$this->form_validation->set_rules('id_jurusan', 'id jurusan', 'trim|required');
 	$this->form_validation->set_rules('tgl_ujian', 'tgl ujian', 'trim|required');
-	$this->form_validation->set_rules('durasi', 'durasi', 'trim|required');
 	$this->form_validation->set_rules('id_nilai', 'id nilai', 'trim|required');
 	$this->form_validation->set_rules('status', 'status', 'trim|required');
 
@@ -215,13 +170,9 @@ class Laporan extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "Id Jurusan");
-	xlsWriteLabel($tablehead, $kolomhead++, "Kode Pendaftaran");
 	xlsWriteLabel($tablehead, $kolomhead++, "Id Peserta");
-	xlsWriteLabel($tablehead, $kolomhead++, "Id Panitia");
-	xlsWriteLabel($tablehead, $kolomhead++, "Id Batch");
+	xlsWriteLabel($tablehead, $kolomhead++, "Id Jurusan");
 	xlsWriteLabel($tablehead, $kolomhead++, "Tgl Ujian");
-	xlsWriteLabel($tablehead, $kolomhead++, "Durasi");
 	xlsWriteLabel($tablehead, $kolomhead++, "Id Nilai");
 	xlsWriteLabel($tablehead, $kolomhead++, "Status");
 
@@ -230,13 +181,9 @@ class Laporan extends CI_Controller
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->id_jurusan);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->kode_pendaftaran);
 	    xlsWriteNumber($tablebody, $kolombody++, $data->id_peserta);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->id_panitia);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->id_batch);
+	    xlsWriteNumber($tablebody, $kolombody++, $data->id_jurusan);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->tgl_ujian);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->durasi);
 	    xlsWriteNumber($tablebody, $kolombody++, $data->id_nilai);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->status);
 
@@ -266,5 +213,5 @@ class Laporan extends CI_Controller
 /* End of file Laporan.php */
 /* Location: ./application/controllers/Laporan.php */
 /* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2018-06-22 15:45:54 */
+/* Generated by Harviacode Codeigniter CRUD Generator 2018-06-25 04:27:05 */
 /* http://harviacode.com */
