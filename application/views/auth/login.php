@@ -60,16 +60,8 @@
                 <div class="form-group has-feedback">
                     <input type="password" class="form-control" name="password" placeholder="Password" id="myInput">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span> <br>
-                    <input type="checkbox" onclick="myFunction()">   Show Password
+                    <!-- <input type="checkbox" onclick="myFunction()">   Show Password -->
 
-                    function myFunction(){
-                    var x = document.getElemenBYId("myInput");
-                        if (x.type === "password"){
-                        x.type = "text";
-                    }else {
-                    x.type = "password";
-                }
-                }
                 </div>
                  <p>* Peserta ujian silahkan hubungi panitia untuk mendapatkan akun.</p>
                 
