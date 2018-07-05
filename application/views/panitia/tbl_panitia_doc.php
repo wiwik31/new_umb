@@ -16,29 +16,29 @@
         </style>
     </head>
     <body>
-        <h2>Tbl_user List</h2>
+        <h2>Tbl_panitia List</h2>
         <table class="word-table" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>Full Name</th>
+		<th>Id Batch</th>
+		<th>Nama Panitia</th>
 		<th>Email</th>
+		<th>Username</th>
 		<th>Password</th>
-		<th>Images</th>
-		<th>Id User Level</th>
-		<th>Is Aktif</th>
+		<th>Status</th>
 		
             </tr><?php
-            foreach ($user_data as $user)
+            foreach ($panitia_data as $panitia)
             {
                 ?>
                 <tr>
 		      <td><?php echo ++$start ?></td>
-		      <td><?php echo $user->full_name ?></td>
-		      <td><?php echo $user->email ?></td>
-		      <td><?php echo $user->password ?></td>
-		      <td><?php echo $user->images ?></td>
-		      <td><?php echo $user->id_user_level ?></td>
-		      <td><?php echo $user->is_aktif ?></td>	
+		      <td><?php echo $panitia->id_batch ?></td>
+		      <td><?php echo $panitia->nama_panitia ?></td>
+		      <td><?php echo $panitia->email ?></td>
+		      <td><?php echo $panitia->username ?></td>
+		      <td><?php echo $panitia->password ?></td>
+		      <td><?php echo $panitia->status ?></td>	
                 </tr>
                 <?php
             }

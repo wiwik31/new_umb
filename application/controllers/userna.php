@@ -9,41 +9,19 @@ class User extends CI_Controller
     {
         parent::__construct();
         if($this->session->userdata('admin_logged_in')!=TRUE && $this->session->userdata('level')==='peserta' )  redirect('welcome');  
-        
         $this->load->model('User_model');
-        $this->load->library('form_validation');
+        $this->load->library('form_validation');        
+	    $this->load->library('datatables');
     }
 
     public function index()
     {
-        $q = urldecode($this->input->get('q', TRUE));
-        $start = intval($this->uri->segment(3));
-        
-        if ($q <> '') {
-            $config['base_url'] = base_url() . '.php/c_url/index.html?q=' . urlencode($q);
-            $config['first_url'] = base_url() . 'index.php/user/index.html?q=' . urlencode($q);
-        } else {
-            $config['base_url'] = base_url() . 'index.php/user/index/';
-            $config['first_url'] = base_url() . 'index.php/user/index/';
-        }
-
-        $config['per_page'] = 10;
-        $config['page_query_string'] = FALSE;
-        $config['total_rows'] = $this->User_model->total_rows($q);
-        $user = $this->User_model->get_limit_data($config['per_page'], $start, $q);
-        $config['full_tag_open'] = '<ul class="pagination pagination-sm no-margin pull-right">';
-        $config['full_tag_close'] = '</ul>';
-        $this->load->library('pagination');
-        $this->pagination->initialize($config);
-
-        $data = array(
-            'user_data' => $user,
-            'q' => $q,
-            'pagination' => $this->pagination->create_links(),
-            'total_rows' => $config['total_rows'],
-            'start' => $start,
-        );
-        $this->template->load('template','user/tbl_user_list', $data);
+        $this->template->load('template','user/tbl_user_list');
+    } 
+    
+    public function json() {
+        header('Content-Type: application/json');
+        echo $this->User_model->json();
     }
 
     public function read($id) 
@@ -51,13 +29,13 @@ class User extends CI_Controller
         $row = $this->User_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id_users' => $row->id_users,
-		'full_name' => $row->full_name,
-		'email' => $row->email,
-		'password' => $row->password,
-		'images' => $row->images,
+		'id_users'      => $row->id_users,
+		'full_name'     => $row->full_name,
+		'email'         => $row->email,
+		'password'      => $row->password,
+		'images'        => $row->images,
 		'id_user_level' => $row->id_user_level,
-		'is_aktif' => $row->is_aktif,
+		'is_aktif'      => $row->is_aktif,
 	    );
             $this->template->load('template','user/tbl_user_read', $data);
         } else {
@@ -69,37 +47,42 @@ class User extends CI_Controller
     public function create() 
     {
         $data = array(
-            'button' => 'Create',
-            'action' => site_url('user/create_action'),
-	    'id_users' => set_value('id_users'),
-	    'full_name' => set_value('full_name'),
-	    'email' => set_value('email'),
-	    'password' => set_value('password'),
-	    'images' => set_value('images'),
+            'button'        => 'Create',
+            'action'        => site_url('user/create_action'),
+	    'id_users'      => set_value('id_users'),
+	    'full_name'     => set_value('full_name'),
+	    'email'         => set_value('email'),
+	    'password'      => set_value('password'),
+	    'images'        => set_value('images'),
 	    'id_user_level' => set_value('id_user_level'),
-	    'is_aktif' => set_value('is_aktif'),
+	    'is_aktif'      => set_value('is_aktif'),
 	);
         $this->template->load('template','user/tbl_user_form', $data);
     }
     
+    
     public function create_action() 
     {
         $this->_rules();
-
+        $foto = $this->upload_foto();
         if ($this->form_validation->run() == FALSE) {
             $this->create();
         } else {
+            $password       = $this->input->post('password',TRUE);
+            $options        = array("cost"=>4);
+            $hashPassword   = password_hash($password,PASSWORD_BCRYPT,$options);
+            
             $data = array(
-		'full_name' => $this->input->post('full_name',TRUE),
-		'email' => $this->input->post('email',TRUE),
-		'password' => $this->input->post('password',TRUE),
-		'images' => $this->input->post('images',TRUE),
+		'full_name'     => $this->input->post('full_name',TRUE),
+		'email'         => $this->input->post('email',TRUE),
+		'password'      => $hashPassword,
+		'images'        => $foto['file_name'],
 		'id_user_level' => $this->input->post('id_user_level',TRUE),
-		'is_aktif' => $this->input->post('is_aktif',TRUE),
+		'is_aktif'      => $this->input->post('is_aktif',TRUE),
 	    );
 
             $this->User_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success 2');
+            $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('user'));
         }
     }
@@ -110,15 +93,15 @@ class User extends CI_Controller
 
         if ($row) {
             $data = array(
-                'button' => 'Update',
-                'action' => site_url('user/update_action'),
-		'id_users' => set_value('id_users', $row->id_users),
-		'full_name' => set_value('full_name', $row->full_name),
-		'email' => set_value('email', $row->email),
-		'password' => set_value('password', $row->password),
-		'images' => set_value('images', $row->images),
+                'button'        => 'Update',
+                'action'        => site_url('user/update_action'),
+		'id_users'      => set_value('id_users', $row->id_users),
+		'full_name'     => set_value('full_name', $row->full_name),
+		'email'         => set_value('email', $row->email),
+		'password'      => set_value('password', $row->password),
+		'images'        => set_value('images', $row->images),
 		'id_user_level' => set_value('id_user_level', $row->id_user_level),
-		'is_aktif' => set_value('is_aktif', $row->is_aktif),
+		'is_aktif'      => set_value('is_aktif', $row->is_aktif),
 	    );
             $this->template->load('template','user/tbl_user_form', $data);
         } else {
@@ -130,24 +113,34 @@ class User extends CI_Controller
     public function update_action() 
     {
         $this->_rules();
-
+        $foto = $this->upload_foto();
         if ($this->form_validation->run() == FALSE) {
             $this->update($this->input->post('id_users', TRUE));
         } else {
-            $data = array(
-		'full_name' => $this->input->post('full_name',TRUE),
-		'email' => $this->input->post('email',TRUE),
-		'password' => $this->input->post('password',TRUE),
-		'images' => $this->input->post('images',TRUE),
+            if($foto['file_name']==''){
+                $data = array(
+		'full_name'     => $this->input->post('full_name',TRUE),
+		'email'         => $this->input->post('email',TRUE),
 		'id_user_level' => $this->input->post('id_user_level',TRUE),
-		'is_aktif' => $this->input->post('is_aktif',TRUE),
-	    );
+		'is_aktif'      => $this->input->post('is_aktif',TRUE));
+            }else{
+                $data = array(
+		'full_name'     => $this->input->post('full_name',TRUE),
+		'email'         => $this->input->post('email',TRUE),
+                'images'        =>$foto['file_name'],
+		'id_user_level' => $this->input->post('id_user_level',TRUE),
+		'is_aktif'      => $this->input->post('is_aktif',TRUE));
+                
+                // ubah foto profil yang aktif
+                $this->session->set_userdata('images',$foto['file_name']);
+            }
 
             $this->User_model->update($this->input->post('id_users', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('user'));
         }
     }
+    
     
     function upload_foto(){
         $config['upload_path']          = './assets/foto_profil';
@@ -178,8 +171,8 @@ class User extends CI_Controller
     {
 	$this->form_validation->set_rules('full_name', 'full name', 'trim|required');
 	$this->form_validation->set_rules('email', 'email', 'trim|required');
-	$this->form_validation->set_rules('password', 'password', 'trim|required');
-	$this->form_validation->set_rules('images', 'images', 'trim|required');
+	//$this->form_validation->set_rules('password', 'password', 'trim|required');
+	//$this->form_validation->set_rules('images', 'images', 'trim|required');
 	$this->form_validation->set_rules('id_user_level', 'id user level', 'trim|required');
 	$this->form_validation->set_rules('is_aktif', 'is aktif', 'trim|required');
 
@@ -248,11 +241,15 @@ class User extends CI_Controller
         
         $this->load->view('user/tbl_user_doc',$data);
     }
+    
+    function profile(){
+        
+    }
 
 }
 
 /* End of file User.php */
 /* Location: ./application/controllers/User.php */
 /* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2018-06-28 03:23:36 */
+/* Generated by Harviacode Codeigniter CRUD Generator 2017-10-04 06:32:22 */
 /* http://harviacode.com */

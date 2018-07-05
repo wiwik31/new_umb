@@ -8,43 +8,20 @@ class Panitia extends CI_Controller
     function __construct()
     {
         parent::__construct();
-		if($this->session->userdata('admin_logged_in')!=TRUE && $this->session->userdata('level')==='peserta' )  redirect('welcome');                   
+        is_login();
         $this->load->model('Panitia_model');
-        $this->load->model('Batch_model');
-        $this->load->library('form_validation');
+        $this->load->library('form_validation');        
+	$this->load->library('datatables');
     }
 
     public function index()
     {
-
-
-        $q = urldecode($this->input->get('q', TRUE));
-        $start = intval($this->input->get('start'));
-        
-        if ($q <> '') {
-            $config['base_url'] = base_url() . 'panitia?q=' . urlencode($q);
-            $config['first_url'] = base_url() . 'panitia?q=' . urlencode($q);
-        } else {
-            $config['base_url'] = base_url() . 'panitia';
-            $config['first_url'] = base_url() . 'panitia';
-        }
-        //Relasikan
-         // $panitia = $this->Panitia_model->batch($config['per_page'], $start, $q);
-
-        $config['per_page'] = 10;
-        $config['page_query_string'] = FALSE;
-        $config['total_rows'] = $this->Panitia_model->total_rows($q);
-        $panitia = $this->Panitia_model->batch($config['per_page'], $start, $q);
-        $this->load->library('pagination');
-        $this->pagination->initialize($config);
-        $data = array(
-            'panitia_data' => $panitia,
-            'q' => $q,
-            'pagination' => $this->pagination->create_links(),
-            'total_rows' => $config['total_rows'],
-            'start' => $start,
-        );
-        $this->template->load('template','panitia/tbl_panitia_list', $data);
+        $this->template->load('template','panitia/tbl_panitia_list');
+    } 
+    
+    public function json() {
+        header('Content-Type: application/json');
+        echo $this->Panitia_model->json();
     }
 
     public function read($id) 
@@ -53,8 +30,9 @@ class Panitia extends CI_Controller
         if ($row) {
             $data = array(
 		'id_panitia' => $row->id_panitia,
+		'id_batch' => $row->id_batch,
 		'nama_panitia' => $row->nama_panitia,
-		'batch' => $row->nama_batch,
+		'email' => $row->email,
 		'username' => $row->username,
 		'password' => $row->password,
 		'status' => $row->status,
@@ -70,14 +48,14 @@ class Panitia extends CI_Controller
     {
         $data = array(
             'button' => 'Create',
-            'batch_data' => $this->Batch_model->get_all(),
             'action' => site_url('panitia/create_action'),
-            'id_panitia' => set_value('id_panitia'),
-            'nama_panitia' => set_value('nama_panitia'),
-            'id_batch' => set_value('id_batch'),
-            'username' => set_value('username'),
-            'password' => set_value('password'),
-            'status' => set_value('status'),
+	    'id_panitia' => set_value('id_panitia'),
+	    'id_batch' => set_value('id_batch'),
+	    'nama_panitia' => set_value('nama_panitia'),
+	    'email' => set_value('email'),
+	    'username' => set_value('username'),
+	    'password' => set_value('password'),
+	    'status' => set_value('status'),
 	);
         $this->template->load('template','panitia/tbl_panitia_form', $data);
     }
@@ -90,8 +68,9 @@ class Panitia extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'nama_panitia' => $this->input->post('nama_panitia',TRUE),
 		'id_batch' => $this->input->post('id_batch',TRUE),
+		'nama_panitia' => $this->input->post('nama_panitia',TRUE),
+		'email' => $this->input->post('email',TRUE),
 		'username' => $this->input->post('username',TRUE),
 		'password' => $this->input->post('password',TRUE),
 		'status' => $this->input->post('status',TRUE),
@@ -111,10 +90,10 @@ class Panitia extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('panitia/update_action'),
-                'batch_data' => $this->Batch_model->get_all(),
 		'id_panitia' => set_value('id_panitia', $row->id_panitia),
-		'nama_panitia' => set_value('nama_panitia', $row->nama_panitia),
 		'id_batch' => set_value('id_batch', $row->id_batch),
+		'nama_panitia' => set_value('nama_panitia', $row->nama_panitia),
+		'email' => set_value('email', $row->email),
 		'username' => set_value('username', $row->username),
 		'password' => set_value('password', $row->password),
 		'status' => set_value('status', $row->status),
@@ -134,8 +113,9 @@ class Panitia extends CI_Controller
             $this->update($this->input->post('id_panitia', TRUE));
         } else {
             $data = array(
-		'nama_panitia' => $this->input->post('nama_panitia',TRUE),
 		'id_batch' => $this->input->post('id_batch',TRUE),
+		'nama_panitia' => $this->input->post('nama_panitia',TRUE),
+		'email' => $this->input->post('email',TRUE),
 		'username' => $this->input->post('username',TRUE),
 		'password' => $this->input->post('password',TRUE),
 		'status' => $this->input->post('status',TRUE),
@@ -163,8 +143,9 @@ class Panitia extends CI_Controller
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('nama_panitia', 'nama panitia', 'trim|required');
 	$this->form_validation->set_rules('id_batch', 'id batch', 'trim|required');
+	$this->form_validation->set_rules('nama_panitia', 'nama panitia', 'trim|required');
+	$this->form_validation->set_rules('email', 'email', 'trim|required');
 	$this->form_validation->set_rules('username', 'username', 'trim|required');
 	$this->form_validation->set_rules('password', 'password', 'trim|required');
 	$this->form_validation->set_rules('status', 'status', 'trim|required');
@@ -173,10 +154,72 @@ class Panitia extends CI_Controller
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
+    public function excel()
+    {
+        $this->load->helper('exportexcel');
+        $namaFile = "tbl_panitia.xls";
+        $judul = "tbl_panitia";
+        $tablehead = 0;
+        $tablebody = 1;
+        $nourut = 1;
+        //penulisan header
+        header("Pragma: public");
+        header("Expires: 0");
+        header("Cache-Control: must-revalidate, post-check=0,pre-check=0");
+        header("Content-Type: application/force-download");
+        header("Content-Type: application/octet-stream");
+        header("Content-Type: application/download");
+        header("Content-Disposition: attachment;filename=" . $namaFile . "");
+        header("Content-Transfer-Encoding: binary ");
+
+        xlsBOF();
+
+        $kolomhead = 0;
+        xlsWriteLabel($tablehead, $kolomhead++, "No");
+	xlsWriteLabel($tablehead, $kolomhead++, "Id Batch");
+	xlsWriteLabel($tablehead, $kolomhead++, "Nama Panitia");
+	xlsWriteLabel($tablehead, $kolomhead++, "Email");
+	xlsWriteLabel($tablehead, $kolomhead++, "Username");
+	xlsWriteLabel($tablehead, $kolomhead++, "Password");
+	xlsWriteLabel($tablehead, $kolomhead++, "Status");
+
+	foreach ($this->Panitia_model->get_all() as $data) {
+            $kolombody = 0;
+
+            //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
+            xlsWriteNumber($tablebody, $kolombody++, $nourut);
+	    xlsWriteNumber($tablebody, $kolombody++, $data->id_batch);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->nama_panitia);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->email);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->username);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->password);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->status);
+
+	    $tablebody++;
+            $nourut++;
+        }
+
+        xlsEOF();
+        exit();
+    }
+
+    public function word()
+    {
+        header("Content-type: application/vnd.ms-word");
+        header("Content-Disposition: attachment;Filename=tbl_panitia.doc");
+
+        $data = array(
+            'tbl_panitia_data' => $this->Panitia_model->get_all(),
+            'start' => 0
+        );
+        
+        $this->load->view('panitia/tbl_panitia_doc',$data);
+    }
+
 }
 
 /* End of file Panitia.php */
 /* Location: ./application/controllers/Panitia.php */
 /* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2018-03-31 16:08:59 */
+/* Generated by Harviacode Codeigniter CRUD Generator 2018-06-28 03:20:34 */
 /* http://harviacode.com */

@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SIUMPT | STMIK Handayani</title>
         <!-- Tell the browser to be responsive to screen width -->
+        <script type="text/javascript" src="jQuery.js"></script>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.7 -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -58,9 +59,17 @@
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="password" class="form-control" name="password" placeholder="Password" id="myInput">
+                    <input type="password" class="form-control" name="password" placeholder="Password">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span> <br>
-                    <input type="checkbox" onclick="myFunction()">   Show Password
+                    <!-- <input type="checkbox" onclick="myFunction()">   Show Password
+                    
+                    <script type="text/javascript">
+                        $(document).ready(function(){
+                            if($(this).is(':checked')){
+                                $('.form-control').attr('type')
+                            }
+                        })
+                    </script>
 
                     function myFunction(){
                     var x = document.getElemenBYId("myInput");
@@ -69,9 +78,9 @@
                     }else {
                     x.type = "password";
                 }
-                }
+                } -->
                 </div>
-                 <p>* Peserta ujian silahkan hubungi panitia untuk mendapatkan akun.</p>
+                 <p>* Silahkan hubungi panitia untuk mendapatkan akun.</p>
                 
                 <!-- Scrip Menghilangkan password -->
 
