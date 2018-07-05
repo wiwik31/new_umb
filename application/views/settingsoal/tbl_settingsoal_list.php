@@ -11,10 +11,10 @@
         <div class="box-body">
             <div class='row'>
             <div class='col-md-9'>
-            <div style="padding-bottom: 10px;"'>
-        <?php echo anchor(site_url('settingsoal/create'), '<i class="fa fa-plus" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?></div>
+            <div style="padding-bottom: 10px;">
+        <!-- <?php echo anchor(site_url('settingsoal/create'), '<i class="fa fa-plus" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?></div>
             </div>
-            <div class='col-md-3'>
+            <div class="col-md-3">
             <form action="<?php echo site_url('settingsoal/index'); ?>" class="form-inline" method="get">
                     <div class="input-group">
                         <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
@@ -32,7 +32,7 @@
                     </div>
                 </form>
             </div>
-            </div>
+            </div> -->
         
    
         <div class="row" style="margin-bottom: 10px">
@@ -58,15 +58,15 @@
                 <tr>
 			<td width="10px"><?php echo ++$start ?></td>
 			<td><?php echo $settingsoal->jumlah_soal ?></td>
-			<!-- <td style="text-align:center" width="200px">
+			<td style="text-align:center" width="200px">
 				<?php 
 				// echo anchor(site_url('settingsoal/read/'.$settingsoal->id_set),'<i class="fa fa-eye" aria-hidden="true"></i>','class="btn btn-danger btn-sm"'); 
 				echo '  '; 
 				echo anchor(site_url('settingsoal/update/'.$settingsoal->id_set),'<i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit ','class="btn btn-danger btn-sm"'); 
 				echo '  '; 
-				echo anchor(site_url('settingsoal/delete/'.$settingsoal->id_set),'<i class="fa fa-trash-o" aria-hidden="true"></i>Hapus ','class="btn btn-danger btn-sm" Delete','onclick="javasciprt: return confirm(\'Yakin menghapus ?\')"'); 
+				// echo anchor(site_url('settingsoal/delete/'.$settingsoal->id_set),'<i class="fa fa-trash-o" aria-hidden="true"></i>Hapus ','class="btn btn-danger btn-sm" Delete','onclick="javasciprt: return confirm(\'Yakin menghapus ?\')"'); 
 				?>
-			</td> -->
+			</td>
 		</tr>
                 <?php
             }

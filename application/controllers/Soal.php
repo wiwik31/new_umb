@@ -21,7 +21,8 @@ class Soal extends CI_Controller
         //batas soal yang tampil
         //$limit = $this->db->query(" SELECT * FROM tbl_soal ORDER BY id_soal ASC LIMIT 20  ")->result();
         $jumlah = $this->db->query("SELECT * FROM tbl_soal ")->result();
-        
+        $j_tampil = $this->db->query("SELECT * from tbl_settingsoal")->row();
+   
         //ketentuan
         $m = count($jumlah);
         $a = 1;
@@ -30,7 +31,7 @@ class Soal extends CI_Controller
 
         $soal_data = array();
         // for ($i=1; $i <= count($limit); $i++) {
-        for ($i=1; $i <= 50; $i++) { 
+        for ($i=1; $i <= $j_tampil->jumlah_soal; $i++) { 
             $r = rand(1, $m);
             //LCM
             $xn = ($a * $r + $c) % $m; 
