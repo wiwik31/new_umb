@@ -17,11 +17,11 @@
             <thead>
                 <tr>
                     <th width="30px">No</th>
-		    <th>Id Peserta</th>
-		    <th>Id Jurusan</th>
-		    <th>Tgl Ujian</th>
-		    <th>Id Nilai</th>
-		    <th>Status</th>
+		    <th>Terdaftar</th>
+		    <th>Selesai Ujian</th>
+		    <th>Lulus</th>
+		    <th>Tidak Lulus</th>
+		    <th>Total</th>
 		    <th width="200px">Action</th>
                 </tr>
             </thead>
@@ -72,7 +72,7 @@
                         {
                             "data": "id_laporan",
                             "orderable": false
-                        },{"data": "id_peserta"},{"data": "id_jurusan"},{"data": "tgl_ujian"},{"data": "id_nilai"},{"data": "status"},
+                        },{"data": "terdaftar"},{"data": "selesai_ujian"},{"data": "lulus"},{"data": "tidak_lulus"},{"data": "total"},
                         {
                             "data" : "action",
                             "orderable": false,

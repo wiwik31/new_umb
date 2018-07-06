@@ -30,11 +30,11 @@ class Laporan extends CI_Controller
         if ($row) {
             $data = array(
 		'id_laporan' => $row->id_laporan,
-		'id_peserta' => $row->id_peserta,
-		'id_jurusan' => $row->id_jurusan,
-		'tgl_ujian' => $row->tgl_ujian,
-		'id_nilai' => $row->id_nilai,
-		'status' => $row->status,
+		'terdaftar' => $row->terdaftar,
+		'selesai_ujian' => $row->selesai_ujian,
+		'lulus' => $row->lulus,
+		'tidak_lulus' => $row->tidak_lulus,
+		'total' => $row->total,
 	    );
             $this->template->load('template','laporan/tbl_laporan_read', $data);
         } else {
@@ -49,11 +49,11 @@ class Laporan extends CI_Controller
             'button' => 'Create',
             'action' => site_url('laporan/create_action'),
 	    'id_laporan' => set_value('id_laporan'),
-	    'id_peserta' => set_value('id_peserta'),
-	    'id_jurusan' => set_value('id_jurusan'),
-	    'tgl_ujian' => set_value('tgl_ujian'),
-	    'id_nilai' => set_value('id_nilai'),
-	    'status' => set_value('status'),
+	    'terdaftar' => set_value('terdaftar'),
+	    'selesai_ujian' => set_value('selesai_ujian'),
+	    'lulus' => set_value('lulus'),
+	    'tidak_lulus' => set_value('tidak_lulus'),
+	    'total' => set_value('total'),
 	);
         $this->template->load('template','laporan/tbl_laporan_form', $data);
     }
@@ -66,11 +66,11 @@ class Laporan extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'id_peserta' => $this->input->post('id_peserta',TRUE),
-		'id_jurusan' => $this->input->post('id_jurusan',TRUE),
-		'tgl_ujian' => $this->input->post('tgl_ujian',TRUE),
-		'id_nilai' => $this->input->post('id_nilai',TRUE),
-		'status' => $this->input->post('status',TRUE),
+		'terdaftar' => $this->input->post('terdaftar',TRUE),
+		'selesai_ujian' => $this->input->post('selesai_ujian',TRUE),
+		'lulus' => $this->input->post('lulus',TRUE),
+		'tidak_lulus' => $this->input->post('tidak_lulus',TRUE),
+		'total' => $this->input->post('total',TRUE),
 	    );
 
             $this->Laporan_model->insert($data);
@@ -88,11 +88,11 @@ class Laporan extends CI_Controller
                 'button' => 'Update',
                 'action' => site_url('laporan/update_action'),
 		'id_laporan' => set_value('id_laporan', $row->id_laporan),
-		'id_peserta' => set_value('id_peserta', $row->id_peserta),
-		'id_jurusan' => set_value('id_jurusan', $row->id_jurusan),
-		'tgl_ujian' => set_value('tgl_ujian', $row->tgl_ujian),
-		'id_nilai' => set_value('id_nilai', $row->id_nilai),
-		'status' => set_value('status', $row->status),
+		'terdaftar' => set_value('terdaftar', $row->terdaftar),
+		'selesai_ujian' => set_value('selesai_ujian', $row->selesai_ujian),
+		'lulus' => set_value('lulus', $row->lulus),
+		'tidak_lulus' => set_value('tidak_lulus', $row->tidak_lulus),
+		'total' => set_value('total', $row->total),
 	    );
             $this->template->load('template','laporan/tbl_laporan_form', $data);
         } else {
@@ -109,11 +109,11 @@ class Laporan extends CI_Controller
             $this->update($this->input->post('id_laporan', TRUE));
         } else {
             $data = array(
-		'id_peserta' => $this->input->post('id_peserta',TRUE),
-		'id_jurusan' => $this->input->post('id_jurusan',TRUE),
-		'tgl_ujian' => $this->input->post('tgl_ujian',TRUE),
-		'id_nilai' => $this->input->post('id_nilai',TRUE),
-		'status' => $this->input->post('status',TRUE),
+		'terdaftar' => $this->input->post('terdaftar',TRUE),
+		'selesai_ujian' => $this->input->post('selesai_ujian',TRUE),
+		'lulus' => $this->input->post('lulus',TRUE),
+		'tidak_lulus' => $this->input->post('tidak_lulus',TRUE),
+		'total' => $this->input->post('total',TRUE),
 	    );
 
             $this->Laporan_model->update($this->input->post('id_laporan', TRUE), $data);
@@ -138,11 +138,11 @@ class Laporan extends CI_Controller
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('id_peserta', 'id peserta', 'trim|required');
-	$this->form_validation->set_rules('id_jurusan', 'id jurusan', 'trim|required');
-	$this->form_validation->set_rules('tgl_ujian', 'tgl ujian', 'trim|required');
-	$this->form_validation->set_rules('id_nilai', 'id nilai', 'trim|required');
-	$this->form_validation->set_rules('status', 'status', 'trim|required');
+	$this->form_validation->set_rules('terdaftar', 'terdaftar', 'trim|required');
+	$this->form_validation->set_rules('selesai_ujian', 'selesai ujian', 'trim|required');
+	$this->form_validation->set_rules('lulus', 'lulus', 'trim|required');
+	$this->form_validation->set_rules('tidak_lulus', 'tidak lulus', 'trim|required');
+	$this->form_validation->set_rules('total', 'total', 'trim|required');
 
 	$this->form_validation->set_rules('id_laporan', 'id_laporan', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
@@ -170,22 +170,22 @@ class Laporan extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "Id Peserta");
-	xlsWriteLabel($tablehead, $kolomhead++, "Id Jurusan");
-	xlsWriteLabel($tablehead, $kolomhead++, "Tgl Ujian");
-	xlsWriteLabel($tablehead, $kolomhead++, "Id Nilai");
-	xlsWriteLabel($tablehead, $kolomhead++, "Status");
+	xlsWriteLabel($tablehead, $kolomhead++, "Terdaftar");
+	xlsWriteLabel($tablehead, $kolomhead++, "Selesai Ujian");
+	xlsWriteLabel($tablehead, $kolomhead++, "Lulus");
+	xlsWriteLabel($tablehead, $kolomhead++, "Tidak Lulus");
+	xlsWriteLabel($tablehead, $kolomhead++, "Total");
 
 	foreach ($this->Laporan_model->get_all() as $data) {
             $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->id_peserta);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->id_jurusan);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->tgl_ujian);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->id_nilai);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->status);
+	    xlsWriteNumber($tablebody, $kolombody++, $data->terdaftar);
+	    xlsWriteNumber($tablebody, $kolombody++, $data->selesai_ujian);
+	    xlsWriteNumber($tablebody, $kolombody++, $data->lulus);
+	    xlsWriteNumber($tablebody, $kolombody++, $data->tidak_lulus);
+	    xlsWriteNumber($tablebody, $kolombody++, $data->total);
 
 	    $tablebody++;
             $nourut++;
@@ -213,5 +213,5 @@ class Laporan extends CI_Controller
 /* End of file Laporan.php */
 /* Location: ./application/controllers/Laporan.php */
 /* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2018-06-25 04:27:05 */
+/* Generated by Harviacode Codeigniter CRUD Generator 2018-07-06 02:06:04 */
 /* http://harviacode.com */

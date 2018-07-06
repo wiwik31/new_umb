@@ -61,35 +61,6 @@
                 <div class="form-group has-feedback">
                     <input type="password" class="form-control" name="password" placeholder="Password">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span> <br>
-<<<<<<< HEAD
-                    <!-- <input type="checkbox" onclick="myFunction()">   Show Password
-                    
-                    <script type="text/javascript">
-                        $(document).ready(function(){
-                            if($(this).is(':checked')){
-                                $('.form-control').attr('type')
-                            }
-                        })
-                    </script>
-
-                    function myFunction(){
-                    var x = document.getElemenBYId("myInput");
-                        if (x.type === "password"){
-                        x.type = "text";
-                    }else {
-                    x.type = "password";
-                }
-                } -->
-=======
-                    <!-- <input type="checkbox" onclick="myFunction()">   Show Password -->
-
->>>>>>> c4e02c805cbf42a62c9f0fcc9fa4433f771e4bab
-                </div>
-                 <p>* Silahkan hubungi panitia untuk mendapatkan akun.</p>
-                
-                <!-- Scrip Menghilangkan password -->
-
-
 
                 <div class="row">
                     <div class="col-xs-4">

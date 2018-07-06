@@ -12,11 +12,11 @@
     <body>
         <h2 style="margin-top:0px">Tbl_laporan Read</h2>
         <table class="table">
-	    <tr><td>Id Peserta</td><td><?php echo $id_peserta; ?></td></tr>
-	    <tr><td>Id Jurusan</td><td><?php echo $id_jurusan; ?></td></tr>
-	    <tr><td>Tgl Ujian</td><td><?php echo $tgl_ujian; ?></td></tr>
-	    <tr><td>Id Nilai</td><td><?php echo $id_nilai; ?></td></tr>
-	    <tr><td>Status</td><td><?php echo $status; ?></td></tr>
+	    <tr><td>Terdaftar</td><td><?php echo $terdaftar; ?></td></tr>
+	    <tr><td>Selesai Ujian</td><td><?php echo $selesai_ujian; ?></td></tr>
+	    <tr><td>Lulus</td><td><?php echo $lulus; ?></td></tr>
+	    <tr><td>Tidak Lulus</td><td><?php echo $tidak_lulus; ?></td></tr>
+	    <tr><td>Total</td><td><?php echo $total; ?></td></tr>
 	    <tr><td></td><td><a href="<?php echo site_url('laporan') ?>" class="btn btn-default">Cancel</a></td></tr>
 	</table>
         </body>

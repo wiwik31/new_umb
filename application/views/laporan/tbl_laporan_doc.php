@@ -20,11 +20,11 @@
         <table class="word-table" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>Id Peserta</th>
-		<th>Id Jurusan</th>
-		<th>Tgl Ujian</th>
-		<th>Id Nilai</th>
-		<th>Status</th>
+		<th>Terdaftar</th>
+		<th>Selesai Ujian</th>
+		<th>Lulus</th>
+		<th>Tidak Lulus</th>
+		<th>Total</th>
 		
             </tr><?php
             foreach ($laporan_data as $laporan)
@@ -32,11 +32,11 @@
                 ?>
                 <tr>
 		      <td><?php echo ++$start ?></td>
-		      <td><?php echo $laporan->id_peserta ?></td>
-		      <td><?php echo $laporan->id_jurusan ?></td>
-		      <td><?php echo $laporan->tgl_ujian ?></td>
-		      <td><?php echo $laporan->id_nilai ?></td>
-		      <td><?php echo $laporan->status ?></td>	
+		      <td><?php echo $laporan->terdaftar ?></td>
+		      <td><?php echo $laporan->selesai_ujian ?></td>
+		      <td><?php echo $laporan->lulus ?></td>
+		      <td><?php echo $laporan->tidak_lulus ?></td>
+		      <td><?php echo $laporan->total ?></td>	
                 </tr>
                 <?php
             }
