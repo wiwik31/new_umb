@@ -64,7 +64,7 @@ class Soal extends CI_Controller
 
             // var_dump($id_soal);exit;
 
-            for ($i=0; $i < 50 ; $i++) { 
+            for ($i=0; $i < 10 ; $i++) { 
                 $nomor =$id_soal[$i];
                 if (!empty($pilihan[$nomor])) {
                    $jawaban = $pilihan[$nomor];
@@ -81,7 +81,7 @@ class Soal extends CI_Controller
             
             // $jum_soal = $this->Soal_model->get_all();
             //rumus skor
-            $skor = 100 / 50 * $benar;
+            $skor = $benar / 10 * 100;
             $nilai = number_format($skor, 1);
             $status = '';
             if ($nilai >= 70) {
