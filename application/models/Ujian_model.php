@@ -27,6 +27,9 @@ class Ujian_model extends CI_Model
         return $this->db->get('tbl_ujian')->result();
     }
 
+    function tampil(
+
+    )
     // get all
     function get_all()
     {

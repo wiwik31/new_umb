@@ -13,7 +13,6 @@
 	    <tr><td width='200'>Selesai Ujian <?php echo form_error('selesai_ujian') ?></td><td><input type="text" class="form-control" name="selesai_ujian" id="selesai_ujian" placeholder="Selesai Ujian" value="<?php echo $selesai_ujian; ?>" /></td></tr>
 	    <tr><td width='200'>Lulus <?php echo form_error('lulus') ?></td><td><input type="text" class="form-control" name="lulus" id="lulus" placeholder="Lulus" value="<?php echo $lulus; ?>" /></td></tr>
 	    <tr><td width='200'>Tidak Lulus <?php echo form_error('tidak_lulus') ?></td><td><input type="text" class="form-control" name="tidak_lulus" id="tidak_lulus" placeholder="Tidak Lulus" value="<?php echo $tidak_lulus; ?>" /></td></tr>
-	    <tr><td width='200'>Total <?php echo form_error('total') ?></td><td><input type="text" class="form-control" name="total" id="total" placeholder="Total" value="<?php echo $total; ?>" /></td></tr>
 	    <tr><td></td><td><input type="hidden" name="id_laporan" value="<?php echo $id_laporan; ?>" /> 
 	    <button type="submit" class="btn btn-danger"><i class="fa fa-floppy-o"></i> <?php echo $button ?></button> 
 	    <a href="<?php echo site_url('laporan') ?>" class="btn btn-info"><i class="fa fa-sign-out"></i> Kembali</a></td></tr>

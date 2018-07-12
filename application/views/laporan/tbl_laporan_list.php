@@ -12,7 +12,7 @@
             <div class='row'>
             <div class='col-md-9'>
             <div style="padding-bottom: 10px;"'>
-        </div>
+        <?php echo anchor(site_url('laporan/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?></div>
             </div>
             <div class='col-md-3'>
             <form action="<?php echo site_url('laporan/index'); ?>" class="form-inline" method="get">
@@ -54,7 +54,6 @@
 		<th>Selesai Ujian</th>
 		<th>Lulus</th>
 		<th>Tidak Lulus</th>
-		<th>Total</th>
 		<th>Action</th>
             </tr><?php
             foreach ($laporan_data as $laporan)
@@ -66,7 +65,6 @@
 			<td><?php echo $laporan->selesai_ujian ?></td>
 			<td><?php echo $laporan->lulus ?></td>
 			<td><?php echo $laporan->tidak_lulus ?></td>
-			<td><?php echo $laporan->total ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
 				echo anchor(site_url('laporan/read/'.$laporan->id_laporan),'<i class="fa fa-eye" aria-hidden="true"></i>','class="btn btn-danger btn-sm"'); 
@@ -80,10 +78,7 @@
                 <?php
             }
             ?>
-
         </table>
-        <?php echo anchor(site_url('laporan/create'), '<i class="fa fa-print" aria-hidden="true"></i> CETAK LAPORAN', 'class="btn btn-danger btn-sm"'); ?></div>
-
         <div class="row">
             <div class="col-md-6">
                 

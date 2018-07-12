@@ -55,6 +55,7 @@ class Soal extends CI_Controller
    
     public function cekJawaban(){
         if (isset($_POST['submit'])) {
+            $j_tampil = $this->db->query("SELECT * from tbl_settingsoal")->row();
             $pilihan = $this->input->post('pilihan');
             $id_soal = $this->input->post('id');
             $skor = 0;
@@ -64,7 +65,7 @@ class Soal extends CI_Controller
 
             // var_dump($id_soal);exit;
 
-            for ($i=0; $i < 10 ; $i++) { 
+            for ($i=0; $i < $j_tampil ; $i++) { 
                 $nomor =$id_soal[$i];
                 if (!empty($pilihan[$nomor])) {
                    $jawaban = $pilihan[$nomor];
@@ -81,7 +82,7 @@ class Soal extends CI_Controller
             
             // $jum_soal = $this->Soal_model->get_all();
             //rumus skor
-            $skor = $benar / 10 * 100;
+            $skor = $benar / $j_tampil * 100;
             $nilai = number_format($skor, 1);
             $status = '';
             if ($nilai >= 70) {

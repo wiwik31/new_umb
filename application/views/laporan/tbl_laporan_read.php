@@ -16,7 +16,6 @@
 	    <tr><td>Selesai Ujian</td><td><?php echo $selesai_ujian; ?></td></tr>
 	    <tr><td>Lulus</td><td><?php echo $lulus; ?></td></tr>
 	    <tr><td>Tidak Lulus</td><td><?php echo $tidak_lulus; ?></td></tr>
-	    <tr><td>Total</td><td><?php echo $total; ?></td></tr>
 	    <tr><td></td><td><a href="<?php echo site_url('laporan') ?>" class="btn btn-default">Cancel</a></td></tr>
 	</table>
         </body>
