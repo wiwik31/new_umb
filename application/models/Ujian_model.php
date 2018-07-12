@@ -27,9 +27,10 @@ class Ujian_model extends CI_Model
         return $this->db->get('tbl_ujian')->result();
     }
 
-    function tampil(
+    // function lulus (){
+    //     return $query = $this->db->query('SELECT * From tbl_ujian where status like'lulus'')->row_array();
+    // }
 
-    )
     // get all
     function get_all()
     {

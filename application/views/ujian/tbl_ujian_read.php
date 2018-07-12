@@ -10,6 +10,7 @@
         </style>
     </head>
     <body>
+        <button>djfhh</button>
         <h2 style="margin-top:0px">Tbl_ujian Read</h2>
         <table class="table">
 	    <tr><td>Id Peserta</td><td><?php echo $id_peserta; ?></td></tr>
