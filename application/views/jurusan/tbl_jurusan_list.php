@@ -49,24 +49,7 @@
         </div>
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
-                <td>No</td>
-                <td>Kode Jurusan</td>
-                <td>Nama Jurusan</td>
-                <td>Jumlah Peserta</td>
-                <td>Action</td>
-            </tr>   
-                <?php foreach ($jurusan_data as $jurusan) {
-                    ?>
-
-                }
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-                <!-- <th>No</th>
+                <th>No</th>
 		<th>Kode Jurusan</th>
 		<th>Nama Jurusan</th>
 		<th>Jumlah Peserta</th>
@@ -79,7 +62,7 @@
 			<td width="10px"><?php echo ++$start ?></td>
 			<td><?php echo $jurusan->kode_jurusan ?></td>
 			<td><?php echo $jurusan->nama_jurusan ?></td>
-			<td><?php echo $jurusan->jur; ?></td> -->
+			<td><?php echo $jurusan->jumlah_peserta ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
 				echo anchor(site_url('jurusan/read/'.$jurusan->id_jurusan),'<i class="fa fa-eye" aria-hidden="true"></i>','class="btn btn-danger btn-sm"'); 
@@ -108,4 +91,3 @@
             </div>
     </section>
 </div>
-}

@@ -85,48 +85,10 @@
                         echo anchor(site_url('peserta/delete/'.$peserta->id_peserta),'<i class="fa fa-trash-o" aria-hidden="true"></i>',array('class'=>'btn btn-danger btn-sm', 'onclick'=>"javasciprt: return confirm('Are You Sure ?')"));
         				?>
         			</td>
-
 		</tr>
                 <?php
             }
             ?>
-
-            <tr>
-                <td rowspan="5">Jumlah</td>
-                <td>Teknik Informatika</td>
-                <td>:</td>
-                <td>
-                    <span><?php  echo $dataif->ti;?></span>
-                </td>
-            </tr>
-            <tr>
-                <td>Sistem Komputer</td>
-                <td>:</td>
-                <td>
-                    <span><?php  echo $dataif->sk;?></span>
-                </td>
-            </tr>
-            <tr>
-                <td>Sistem Informasi</td>
-                <td>:</td>
-                <td>
-                    <span><?php  echo $dataif->si;?></span>
-                </td>
-            </tr>
-            <tr>
-                <td>Manajemen Informasi</td>
-                <td>:</td>
-                <td>
-                    <span><?php  echo $dataif->mi;?></span>
-                </td>
-            </tr>
-            <tr>
-                <td>Komputerisasi Akuntansi</td>
-                <td>:</td>
-                <td>
-                    <span><?php  echo $dataif->ka;?></span>
-                </td>
-            </tr>
         </table>
         <div class="row">
             <div class="col-md-6">

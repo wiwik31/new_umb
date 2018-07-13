@@ -13,19 +13,6 @@ class Jurusan extends CI_Controller
         $this->load->library('form_validation');
     }
 
-    // public function get_sum_count_if ()
-    // {
-    //     $sql = "SELECT count(if(jur='Teknik Informatika', ti, NULL)) as ti,
-    //                    count(if(jur='Sistem Komputer', sk, NULL)) as sk,
-    //                    count(if(jur='Sistem Informasi', si, NULL)) as si,
-    //                    count(if(jur='Manajemen Informatika', mi, NULL)) as mi,
-    //                    count(if(jur='Komputerisasi Akuntansi', ka, NULL)) as ka,
-
-    //     ";
-    //     $result = $this->db->query($sql);
-    //     return $result->row();
-    // }
-
     public function index()
     {
         $q = urldecode($this->input->get('q', TRUE));

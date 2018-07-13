@@ -14,11 +14,6 @@ class Jurusan_model extends CI_Model
     {
         parent::__construct();
     }
-    // function get_sum_count_if()
-    // {
-    //     $data['jurusan'] = $this->Jurusan->get_sum_count_if();
-    //     $this->load->tbl_jurusan('tbl_jurusan_list','$data');
-    // }
 
     // get all
     function get_all()
