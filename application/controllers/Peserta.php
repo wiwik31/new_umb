@@ -16,6 +16,12 @@ class Peserta extends CI_Controller
         $this->load->library('form_validation');
     }
 
+    
+    function get_sum_count_if()
+    {
+        $data['dataif'] = $this->Peserta_model->get_sum_count_if();
+        $this->load->jurusan('tbl_jurusan_list','$data');
+    } 
 
     public function index()
     {

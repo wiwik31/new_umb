@@ -15,6 +15,21 @@ class Peserta_model extends CI_Model
         parent::__construct();
     }
 
+    public function get_sum_count_if()
+    {
+        $sql = "SELECT count(if(jurusan='Teknik Informatika', ti, NULL)) as ti,
+                       count(if(jurusan='Sistem Komputer', sk, NULL)) as sk,
+                       count(if(jurusan='Sistem Informasi', si, NULL)) as si,
+                       count(if(jurusan='Manajemen Informatika', mi, NULL)) as mi,
+                       count(if(jurusan='Komputerisasi Akuntansi', ka, NULL)) as ka,
+                       FROM tbl_peserta
+
+        ";
+        $result = $this->db->query($sql);
+        return $result->row();
+    }
+
+
     function Jurusan($limit, $start = 0, $q = NULL)
     {
 
