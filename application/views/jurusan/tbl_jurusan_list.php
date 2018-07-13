@@ -60,7 +60,7 @@
 
                 }
             <tr>
-                <td width="10px"><?php echo ++$start ?></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -108,3 +108,4 @@
             </div>
     </section>
 </div>
+}
